@@ -59,7 +59,7 @@ Function encontrar_horas_extras(hoja As Worksheet, _
     Else
         col_range = range_horas_extras.Column
         row_range = range_horas_extras.Row
-        Set range_horas_extras_valor = Range(Cells(row_range, col_range + 3), Cells(row_range, col_range + 6))
+        Set range_horas_extras_valor = Range(Cells(row_range, col_range + 3), Cells(row_range, col_range + 7))
         range_horas_extras_valor.Copy
         Worksheets(nombre_hoja_destino).Activate
         'Worksheets("DATOS_HORAS_EXTRAS").Select
@@ -116,14 +116,15 @@ Sub generar_formula_texto_para_planos(nombre_hoja_destino As String, row_index A
     Worksheets(nombre_hoja_destino).Activate
     Worksheets(nombre_hoja_destino).Select
     
-    columnas_formulas = Array("G", "H", "I", "J")
-    formulas_lista = Array("=+CONCATENATE(RC[-6],"";"",RC[-5])", _
-                            "=+CONCATENATE(RC[-7],"";"",RC[-5])", _
-                            "=+CONCATENATE(RC[-8],"";"",RC[-5])", _
-                            "=+CONCATENATE(RC[-9],"";"",RC[-5])")
+    columnas_formulas = Array("H", "I", "J", "K", "L")
+    formulas_lista = Array("=+CONCATENATE(RC[-7],"";"",RC[-6])", _
+                            "=+CONCATENATE(RC[-8],"";"",RC[-6])", _
+                            "=+CONCATENATE(RC[-9],"";"",RC[-6])", _
+                            "=+CONCATENATE(RC[-10],"";"",RC[-6])", _
+                            "=+CONCATENATE(RC[-11],"";"",RC[-6])")
     
-    index_col = -5
-    For col = 0 To 3
+    index_col = -6
+    For col = 0 To 4
         columna = columnas_formulas(col) & row_index
         Range(columna).Delete
         Range(columna).Select
@@ -136,11 +137,12 @@ End Sub
 Sub Generar_archivos_planos()
     
     Dim path As String
-    path = Range("M1").Value
-    Call generar_archivo_columna("G1", path)
+    path = Range("O1").Value
     Call generar_archivo_columna("H1", path)
     Call generar_archivo_columna("I1", path)
     Call generar_archivo_columna("J1", path)
+    Call generar_archivo_columna("K1", path)
+    Call generar_archivo_columna("L1", path)
     
   
     
